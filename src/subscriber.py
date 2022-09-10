@@ -15,6 +15,7 @@ logging.basicConfig(
 
 host = os.environ.get('MEMCHACHED_HOST') or 'memcached'
 port = os.environ.get('MEMCHACHED_PORT') or 11211
+mhost = os.environ.get('MQTT_HOST') or '10.2.0.40'
 login = os.environ.get('MQTT_LOGIN') or 'zigstar'
 password = os.environ.get('MQTT_PASSWORD') or 'zigstar'
 
@@ -46,7 +47,7 @@ def on_message(client, userdata, msg):
 logging.info('start subscriber %s:%s %s:%s' % (host, port, login, password))
 client = mqtt.Client()
 client.username_pw_set(login, password)
-client.connect("10.2.0.40", 1883, 60)
+client.connect(mhost, 1883, 60)
 
 client.on_connect = on_connect
 client.on_message = on_message
